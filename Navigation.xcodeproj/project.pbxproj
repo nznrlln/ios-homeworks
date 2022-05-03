@@ -13,6 +13,8 @@
 		FD71F6372821854600222F81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD71F6352821854600222F81 /* Main.storyboard */; };
 		FD71F6392821854700222F81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD71F6382821854700222F81 /* Assets.xcassets */; };
 		FD71F63C2821854700222F81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD71F63A2821854700222F81 /* LaunchScreen.storyboard */; };
+		FD71F64428218EF600222F81 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD71F64328218EF600222F81 /* ProfileView.xib */; };
+		FD71F64628219B8900222F81 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD71F64528219B8900222F81 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		FD71F6382821854700222F81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD71F63B2821854700222F81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD71F63D2821854700222F81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD71F64328218EF600222F81 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		FD71F64528219B8900222F81 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		FD71F62E2821854600222F81 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				FD71F64728219CC300222F81 /* ProfileView */,
 				FD71F62F2821854600222F81 /* AppDelegate.swift */,
 				FD71F6312821854600222F81 /* SceneDelegate.swift */,
 				FD71F6332821854600222F81 /* ViewController.swift */,
@@ -65,6 +70,15 @@
 				FD71F63D2821854700222F81 /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		FD71F64728219CC300222F81 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				FD71F64528219B8900222F81 /* ProfileView.swift */,
+				FD71F64328218EF600222F81 /* ProfileView.xib */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD71F64428218EF600222F81 /* ProfileView.xib in Resources */,
 				FD71F63C2821854700222F81 /* LaunchScreen.storyboard in Resources */,
 				FD71F6392821854700222F81 /* Assets.xcassets in Resources */,
 				FD71F6372821854600222F81 /* Main.storyboard in Resources */,
@@ -138,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD71F64628219B8900222F81 /* ProfileView.swift in Sources */,
 				FD71F6342821854600222F81 /* ViewController.swift in Sources */,
 				FD71F6302821854600222F81 /* AppDelegate.swift in Sources */,
 				FD71F6322821854600222F81 /* SceneDelegate.swift in Sources */,
