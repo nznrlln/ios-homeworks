@@ -18,9 +18,6 @@ class PostViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .systemBackground
 
-        self.title = postFromFeed.post.postTitle
-        // не совсем понятно где именно надо созавать структуру? Просто внутри любого файла .swift или именно внутри класса? Если просто внутри файла - то значние очень просто передается, если внутри класса - сначала создаем ссылку на класс, потом подтягиваем
-
         self.barButton.image = UIImage(systemName: "info.circle")
         navigationItem.rightBarButtonItems = [barButton]
         self.barButton.target = self

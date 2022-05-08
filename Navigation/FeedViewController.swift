@@ -13,7 +13,7 @@ class FeedViewController: UIViewController {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
 
-    var post = Post(postTitle: "Hot News")  // не совсем понятно где именно надо созавать структуру? Просто внутри любого файла .swift или именно внутри класса? Если просто внутри файла - то значние очень просто передается, если внутри класса - сначала создаем ссылку на класс, потом подтягиваем
+    var post = Post(title: "Hot News")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,34 +28,10 @@ class FeedViewController: UIViewController {
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("Feed", #function)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("Feed", #function)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("Feed", #function)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("Feed", #function)
-    }
-
-    deinit {
-        print("Feed", #function, #file)
-    }
-
-
     @objc
     func handleButtonTap(){
         let postVC = PostViewController()
+        postVC.title = post.title
         self.navigationController?.pushViewController(postVC, animated: true)
     }
 
