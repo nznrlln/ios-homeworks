@@ -20,11 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let feedVC = FeedViewController()
         let profileVC = ProfileViewController()
 
+
         let feedNC = UINavigationController(rootViewController: feedVC)
         let profileNC = UINavigationController(rootViewController: profileVC)
 
         feedNC.tabBarItem.title = "Feed"
         feedNC.tabBarItem.image = UIImage(systemName: "newspaper")
+
         profileNC.tabBarItem.title = "Profile"
         profileNC.tabBarItem.image = UIImage(systemName: "brain.head.profile")
 

@@ -19,6 +19,8 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.title = "Feed"
+        self.navigationController?.navigationBar.backgroundColor = .white
         self.view.backgroundColor = .darkGray
 
         self.postButton.setTitle("Press to see the post", for: .normal)
