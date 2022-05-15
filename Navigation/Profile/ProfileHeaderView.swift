@@ -45,6 +45,22 @@ class ProfileHeaderView: UIView {
         return status
     }()
 
+    let textField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.font = .systemFont(ofSize: 15, weight: .regular)
+        textField.textColor = .black
+
+        textField.frame = CGRect(x: 16 + 110 + 16, y: 16 + 110 - 16, width: 200, height: 40)
+        textField.layer.cornerRadius = 12
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+
+        textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+
+        return textField
+    }()
+
     let showStatusButton: UIButton = {
         let showStatusButton = UIButton()
         showStatusButton.setTitle("Show status", for: .normal)
@@ -52,7 +68,7 @@ class ProfileHeaderView: UIView {
         showStatusButton.backgroundColor = .blue
 
 
-        showStatusButton.frame = CGRect(x: 16, y: 16 + 110 + 16, width: 300, height: 50)
+        showStatusButton.frame = CGRect(x: 16, y: 16 + 110 - 16 + 40 + 16, width: 300, height: 50)
         showStatusButton.layer.cornerRadius = 14
         showStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         showStatusButton.layer.shadowRadius = 4
@@ -64,8 +80,17 @@ class ProfileHeaderView: UIView {
         return showStatusButton
     }()
 
+    private var statusText: String? = nil
+
+
     @objc func handleButtonTap() {
         print(status.text ?? "Status is empty")
+        status.text = statusText
+        textField.text = nil
+    }
+
+    @objc func statusTextChanged(_ textField: UITextField) {
+        statusText = textField.text 
     }
 
 }
@@ -73,9 +98,13 @@ class ProfileHeaderView: UIView {
 
 /*
  Вопросы:
- - не дан размер аватарки. Взято "на глаз"
- - не удалось задать у текста точку (x: avatar.frame.maxX + 16) для автоматического отступа от картинки
- - закругление кнопки точно 4? Больше похоже на 14
- - не получилось настроить отступ кнопки от правого края вьюшки внутри класса "ProfileHeaderView" - настраивал внутри "ProfileViewController"
+ - Я не понял зачем в задании просят создать заново ProfileViewController, если мы должны "тянуть" его из прошлого домашнего задания?
+ - В шаблонах используется navigation bar и все отступы по оси Y начинаются оттуда. Вопрос: создавать и настраивать верхнюю шапку лучше файле класса-контроллера или в appdelegate, при создании экземпляров контролееров? Если второй вариант, то через экземпляр ViewController'а или через экземпляр NavigationContoller'а?
+ - В шаблоне NavigationBar, TabBar и зона StatusBar белого цвета - изменил на белый все кроме status bar. В сети советуют просто привязать вьюшку у safe area, но если я правильно понял, то это относится к auto layout (еще не изучал). Как то еще возможно сделать?
+ - Не дан размер аватарки. Взято "на глаз"
+ - Не удалось задать у текста точку (x: avatar.frame.maxX + 16) для автоматического отступа от картинки
+ - Закругление кнопки точно 4? Больше похоже на 14
+ - Не получилось настроить размер frame'а элементов от правого края вьюшки внутри класса "ProfileHeaderView" - настраивал внутри "ProfileViewController", т.к. не могу достать frame будущей "родительской вью". Как то внутри исходного класса ProfileHeaderView это возможно настроить?
+ - Из-за дополнительного задания съезжает кнопка статуса
  */
 

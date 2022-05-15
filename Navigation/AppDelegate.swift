@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             feedNC,
             profileNC
         ]
+        tabBarVC.tabBar.backgroundColor = .white
 
         self.window?.rootViewController = tabBarVC
         self.window?.makeKeyAndVisible()
