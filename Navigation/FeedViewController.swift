@@ -15,7 +15,7 @@ class FeedViewController: UIViewController {
 
     var post = Post(title: "Hot News")
 
-    private func viewSettings() {
+    private func viewInitialSettings() {
         self.title = "Feed"
         self.navigationController?.navigationBar.backgroundColor = .white
         self.view.backgroundColor = .darkGray
@@ -25,7 +25,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        viewSettings()
+        viewInitialSettings()
 
         self.postButton.setTitle("Press to see the post", for: .normal)
         self.view.addSubview(postButton)

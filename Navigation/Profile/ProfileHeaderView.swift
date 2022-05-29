@@ -9,13 +9,12 @@ import UIKit
 
 class ProfileHeaderView: UIView {
 
-    let avatar: UIImageView = {
+    let avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "sleeping cat"))
-        let width: Double = 110
-        let height: Double = 110
+        let radius: Double = 55
 
-        avatar.frame = CGRect(x: 16, y: 16, width: width, height: height)
-        avatar.layer.cornerRadius = width/2
+        avatar.frame = CGRect.zero
+        avatar.layer.cornerRadius = radius
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.clipsToBounds = true
@@ -23,35 +22,35 @@ class ProfileHeaderView: UIView {
         return avatar
     }()
 
-    let nickname: UILabel = {
+    let nicknameLabel: UILabel = {
         let nickname = UILabel()
         nickname.text = "Sleeping Cat"
         nickname.font = .systemFont(ofSize: 18, weight: .bold)
         nickname.textColor = .black
 
-        nickname.frame = CGRect(x: 16 + 110 + 16, y: 27, width: 200, height: 18)
+        nickname.frame = CGRect.zero
 
         return nickname
     }()
 
-    let status: UILabel = {
+    let statusLabel: UILabel = {
         let status = UILabel()
         status.text = "ZzZzZzZzZzZzZzZz..."
         status.font = .systemFont(ofSize: 14, weight: .regular)
         status.textColor = .gray
 
-        status.frame = CGRect(x: 16 + 110 + 16, y: 16 + 110 - 18 - 14, width: 200, height: 14)
+        status.frame = CGRect.zero
 
         return status
     }()
 
-    let textField: UITextField = {
+    let statusTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
 
-        textField.frame = CGRect(x: 16 + 110 + 16, y: 16 + 110 - 16, width: 200, height: 40)
+        textField.frame = CGRect.zero
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
@@ -68,7 +67,7 @@ class ProfileHeaderView: UIView {
         showStatusButton.backgroundColor = .blue
 
 
-        showStatusButton.frame = CGRect(x: 16, y: 16 + 110 - 16 + 40 + 16, width: 300, height: 50)
+        showStatusButton.frame = CGRect.zero
         showStatusButton.layer.cornerRadius = 14
         showStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         showStatusButton.layer.shadowRadius = 4
@@ -82,18 +81,76 @@ class ProfileHeaderView: UIView {
 
     private var statusText: String? = nil
 
-
     @objc func handleButtonTap() {
-        print(status.text ?? "Status is empty")
-        status.text = statusText
-        textField.text = nil
+        print(statusLabel.text ?? "Status is empty")
+        statusLabel.text = statusText
+        statusTextField.text = nil
     }
 
-    @objc func statusTextChanged(_ textField: UITextField) {
-        statusText = textField.text 
+    @objc func statusTextChanged(_ statusTextField: UITextField) {
+        statusText = statusTextField.text
     }
 
+    init(){
+        super.init(frame: .zero)
+        self.backgroundColor = .darkGray
+        translatesAutoresizingMaskIntoConstraints = false
+        setupSubviews()
+        setupSubviewsLayout()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupSubviews() {
+            self.addSubview(avatarImageView)
+            self.addSubview(nicknameLabel)
+            self.addSubview(statusLabel)
+            self.addSubview(statusTextField)
+            self.addSubview(showStatusButton)
+        }
+    
+    private func setupSubviewsLayout() {
+
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
+        showStatusButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 110),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 110),
+
+            nicknameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+            nicknameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+
+            statusLabel.leftAnchor.constraint(equalTo: nicknameLabel.leftAnchor),
+            statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -32),
+
+            statusTextField.leftAnchor.constraint(equalTo: nicknameLabel.leftAnchor),
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
+            statusTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+
+            showStatusButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            showStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
+            showStatusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        // точного макета с кнопкой нет - сделал как получилось
+    }
 }
 
+// 1. можно ли как то добавить subview внутри класса UIView?
+// типа self.addSubview(avatar) - ругается
+// на stackOverflow - кто-то пытался сделать это через drawRect, но ему настоятельно рекомендовали от этого отказаться и делать все через viewDidLoad в контроллере
+// нашел один вариант - func setupSubviews, или бывает еще более удобный способ?
 
+// 2. обязательно обзывать "avatarImageView", "fullNameLabel" и тд? В реальной работе и проектах в названии элемента указывают от какого класса он наследуется? как avatar от UIImageView? -
+// ответ - да.  "2.9 Включайте в имена информацию о типе данных, если он не очевиден."
 
+// 3. В каких местах надо 100% указывать "translatesAutoresizingMaskIntoConstraints = false"?
