@@ -11,28 +11,36 @@ class ProfileViewController: UIViewController {
 
     var profileHeaderView = ProfileHeaderView()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    private func viewSettings() {
         self.title = "Profile"
         self.navigationController?.navigationBar.backgroundColor = .white
         self.view.backgroundColor = .lightGray
+    }
 
+    private func subviewsSetting(){
         profileHeaderView.addSubview(profileHeaderView.avatar)
         profileHeaderView.addSubview(profileHeaderView.nickname)
         profileHeaderView.addSubview(profileHeaderView.status)
         profileHeaderView.addSubview(profileHeaderView.showStatusButton)
         profileHeaderView.addSubview(profileHeaderView.textField)
+    }
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        viewSettings()
+        subviewsSetting()
 
         view.addSubview(profileHeaderView)
 
     }
 
     override func viewWillLayoutSubviews() {
+        // Для обычного layout используем viewDidLoad, методы override func viewWillLayoutSubviews() и didLayoutSubviews вызываются за время жизни контроллера много раз, не стоит заставлять движок autolayouta каждый раз пересчитывать его
         super.viewWillLayoutSubviews()
 
-//        profileHeaderView.frame = view.frame // если не использовать navig bar и не делать отступы
         profileHeaderView.frame = CGRect(
             x: 0,
             y: self.navigationController?.navigationBar.frame.maxY ?? 0,
@@ -61,7 +69,7 @@ class ProfileViewController: UIViewController {
         )
 
 
-//        profileHeaderView.backgroundColor = .systemBrown // для проверки загрузки
+        //        profileHeaderView.backgroundColor = .systemBrown // для проверки загрузки
     }
 
 }
