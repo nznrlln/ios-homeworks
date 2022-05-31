@@ -12,7 +12,6 @@ class ProfileHeaderView: UIView {
     let avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "sleeping cat"))
         let radius: Double = 55
-
         avatar.frame = CGRect.zero
         avatar.layer.cornerRadius = radius
         avatar.layer.borderWidth = 3
@@ -27,7 +26,6 @@ class ProfileHeaderView: UIView {
         nickname.text = "Sleeping Cat"
         nickname.font = .systemFont(ofSize: 18, weight: .bold)
         nickname.textColor = .black
-
         nickname.frame = CGRect.zero
 
         return nickname
@@ -38,7 +36,6 @@ class ProfileHeaderView: UIView {
         status.text = "ZzZzZzZzZzZzZzZz..."
         status.font = .systemFont(ofSize: 14, weight: .regular)
         status.textColor = .gray
-
         status.frame = CGRect.zero
 
         return status
@@ -49,7 +46,6 @@ class ProfileHeaderView: UIView {
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
-
         textField.frame = CGRect.zero
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
@@ -66,7 +62,6 @@ class ProfileHeaderView: UIView {
         showStatusButton.setTitleColor(.white, for: .normal)
         showStatusButton.backgroundColor = .blue
 
-
         showStatusButton.frame = CGRect.zero
         showStatusButton.layer.cornerRadius = 14
         showStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -78,18 +73,6 @@ class ProfileHeaderView: UIView {
 
         return showStatusButton
     }()
-
-    private var statusText: String? = nil
-
-    @objc func handleButtonTap() {
-        print(statusLabel.text ?? "Status is empty")
-        statusLabel.text = statusText
-        statusTextField.text = nil
-    }
-
-    @objc func statusTextChanged(_ statusTextField: UITextField) {
-        statusText = statusTextField.text
-    }
 
     init(){
         super.init(frame: .zero)
@@ -143,14 +126,32 @@ class ProfileHeaderView: UIView {
         ])
         // точного макета с кнопкой нет - сделал как получилось
     }
+
+    //переменная, которой автоматически будет присваивается значение "строки", введенного в uiTextField
+    private var statusText: String? = nil
+
+    @objc func handleButtonTap() {
+        print(statusLabel.text ?? "Status is empty")
+        statusLabel.text = statusText
+        statusTextField.text = nil
+    }
+    // метод отвечающий за присвоение введенного на экране текста в statusText
+    @objc func statusTextChanged(_ statusTextField: UITextField) {
+        statusText = statusTextField.text
+    }
 }
+/*
+ Вопросы:
+ 1. можно ли как то добавить subview внутри класса UIView?
+ типа self.addSubview(avatar) - ругается
+ на stackOverflow - кто-то пытался сделать это через drawRect, но ему настоятельно рекомендовали от этого отказаться и делать все через viewDidLoad в контроллере
+ нашел один вариант - func setupSubviews, или бывает еще более удобный способ?
 
-// 1. можно ли как то добавить subview внутри класса UIView?
-// типа self.addSubview(avatar) - ругается
-// на stackOverflow - кто-то пытался сделать это через drawRect, но ему настоятельно рекомендовали от этого отказаться и делать все через viewDidLoad в контроллере
-// нашел один вариант - func setupSubviews, или бывает еще более удобный способ?
+ 2. обязательно обзывать "avatarImageView", "fullNameLabel" и тд? В реальной работе и проектах в названии элемента указывают от какого класса он наследуется? как avatar от UIImageView? -
+ ответ - да.  "2.9 Включайте в имена информацию о типе данных, если он не очевиден."
 
-// 2. обязательно обзывать "avatarImageView", "fullNameLabel" и тд? В реальной работе и проектах в названии элемента указывают от какого класса он наследуется? как avatar от UIImageView? -
-// ответ - да.  "2.9 Включайте в имена информацию о типе данных, если он не очевиден."
+ 3. В каких местах надо 100% указывать "translatesAutoresizingMaskIntoConstraints = false"?
 
-// 3. В каких местах надо 100% указывать "translatesAutoresizingMaskIntoConstraints = false"?
+ 4. Перегрузил ли я метод viewInitialSettings добавив в него "setupSubviews()" и "setupSubviewsLayout()"?
+ или лучше эти методы вызывать отдельно в viewDidLoad?
+*/
