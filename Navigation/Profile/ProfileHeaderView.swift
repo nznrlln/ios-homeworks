@@ -11,6 +11,7 @@ class ProfileHeaderView: UIView {
 
     let avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "sleeping cat"))
+        avatar.translatesAutoresizingMaskIntoConstraints = false
         let radius: Double = 55
         avatar.frame = CGRect.zero
         avatar.layer.cornerRadius = radius
@@ -23,6 +24,7 @@ class ProfileHeaderView: UIView {
 
     let nicknameLabel: UILabel = {
         let nickname = UILabel()
+        nickname.translatesAutoresizingMaskIntoConstraints = false
         nickname.text = "Sleeping Cat"
         nickname.font = .systemFont(ofSize: 18, weight: .bold)
         nickname.textColor = .black
@@ -33,6 +35,7 @@ class ProfileHeaderView: UIView {
 
     let statusLabel: UILabel = {
         let status = UILabel()
+        status.translatesAutoresizingMaskIntoConstraints = false
         status.text = "ZzZzZzZzZzZzZzZz..."
         status.font = .systemFont(ofSize: 14, weight: .regular)
         status.textColor = .gray
@@ -43,6 +46,7 @@ class ProfileHeaderView: UIView {
 
     let statusTextField: UITextField = {
         let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
@@ -58,6 +62,7 @@ class ProfileHeaderView: UIView {
 
     let showStatusButton: UIButton = {
         let showStatusButton = UIButton()
+        showStatusButton.translatesAutoresizingMaskIntoConstraints = false
         showStatusButton.setTitle("Show status", for: .normal)
         showStatusButton.setTitleColor(.white, for: .normal)
         showStatusButton.backgroundColor = .blue
@@ -73,6 +78,9 @@ class ProfileHeaderView: UIView {
 
         return showStatusButton
     }()
+
+    //переменная, которой автоматически будет присваивается значение "строки", введенного в uiTextField
+    private var statusText: String? = nil
 
     init(){
         super.init(frame: .zero)
@@ -96,12 +104,6 @@ class ProfileHeaderView: UIView {
     
     private func setupSubviewsLayout() {
 
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusTextField.translatesAutoresizingMaskIntoConstraints = false
-        showStatusButton.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
             avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -124,15 +126,17 @@ class ProfileHeaderView: UIView {
             showStatusButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-        // точного макета с кнопкой нет - сделал как получилось
-    }
 
-    //переменная, которой автоматически будет присваивается значение "строки", введенного в uiTextField
-    private var statusText: String? = nil
+    }
 
     @objc func handleButtonTap() {
         print(statusLabel.text ?? "Status is empty")
-        statusLabel.text = statusText
+        guard let text = statusText else {
+            print("Status field is empty. You need to add something first.")
+            return
+        } // чтобы не стереть исходный статус значением nil
+        statusLabel.text = text
+//        statusLabel.text = statusText
         statusTextField.text = nil
     }
     // метод отвечающий за присвоение введенного на экране текста в statusText
@@ -140,18 +144,3 @@ class ProfileHeaderView: UIView {
         statusText = statusTextField.text
     }
 }
-/*
- Вопросы:
- 1. можно ли как то добавить subview внутри класса UIView?
- типа self.addSubview(avatar) - ругается
- на stackOverflow - кто-то пытался сделать это через drawRect, но ему настоятельно рекомендовали от этого отказаться и делать все через viewDidLoad в контроллере
- нашел один вариант - func setupSubviews, или бывает еще более удобный способ?
-
- 2. обязательно обзывать "avatarImageView", "fullNameLabel" и тд? В реальной работе и проектах в названии элемента указывают от какого класса он наследуется? как avatar от UIImageView? -
- ответ - да.  "2.9 Включайте в имена информацию о типе данных, если он не очевиден."
-
- 3. В каких местах надо 100% указывать "translatesAutoresizingMaskIntoConstraints = false"?
-
- 4. Перегрузил ли я метод viewInitialSettings добавив в него "setupSubviews()" и "setupSubviewsLayout()"?
- или лучше эти методы вызывать отдельно в viewDidLoad?
-*/

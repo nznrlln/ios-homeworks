@@ -30,9 +30,10 @@ class FeedViewController: UIViewController {
 
     let stackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.frame = CGRect.zero
         stackView.backgroundColor = .cyan
-        stackView.axis = .vertical // вертикальное расположение элементов
+        stackView.axis = .vertical
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
 
@@ -56,14 +57,9 @@ class FeedViewController: UIViewController {
 
     private func setupSubviewsLayout() {
 
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
-//            stackView.widthAnchor.constraint(equalToConstant: 200),
-//            stackView.heightAnchor.constraint(equalToConstant: 100)
-            // кнопки сами зададут размер stackView
         ])
     }
 

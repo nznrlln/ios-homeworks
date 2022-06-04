@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController {
 
     let profileButton: UIButton = {
         let button = UIButton(frame: CGRect.zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Profile button", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
@@ -40,11 +41,8 @@ class ProfileViewController: UIViewController {
             profileHeaderView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             profileHeaderView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
-        ])
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
 
-        profileButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
             profileButton.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             profileButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             profileButton.rightAnchor.constraint(equalTo: self.view.rightAnchor),
