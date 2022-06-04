@@ -9,21 +9,41 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    let closeButton = UIButton()
+    let closeButton: UIButton = {
+        let closeButton = UIButton()
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("Close info", for: .normal)
+        closeButton.frame = CGRect.zero
+        closeButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
+
+        return closeButton
+    }()
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
+
+    private func viewInitialSettings() {
+        self.view.backgroundColor = .blue
+
+        setupSubviews()
+        setupSubviewsLayout()
+    }
+
+    private func setupSubviews() {
+        self.view.addSubview(closeButton)
+    }
+
+    private func setupSubviewsLayout() {
+        NSLayoutConstraint.activate([
+            closeButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            closeButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .blue
-
-        self.closeButton.setTitle("Close info", for: .normal)
-        self.view.addSubview(closeButton)
-        self.closeButton.frame = CGRect(x: screenWidth/2 - 100, y: screenHeight/2 - 20, width: 200, height: 20)
-        self.closeButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
-
+        viewInitialSettings()
     }
 
     @objc

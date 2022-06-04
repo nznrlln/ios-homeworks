@@ -10,18 +10,34 @@ import UIKit
 class PostViewController: UIViewController {
 
     var postFromFeed = FeedViewController()
-    let barButton = UIBarButtonItem()
+    let barButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem()
+        barButton.image = UIImage(systemName: "info.circle")
+
+        return barButton
+    }()
+
+
+    private func viewInitialSettings() {
+        self.view.backgroundColor = .systemBackground
+
+        setupSubviews()
+        setupSubviewsLayout()
+    }
+
+    private func setupSubviews() {
+        navigationItem.rightBarButtonItems = [barButton]
+        barButton.target = self
+        barButton.action = #selector(handleButtonTap)
+    }
+
+    private func setupSubviewsLayout() {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .systemBackground
-
-        self.barButton.image = UIImage(systemName: "info.circle")
-        navigationItem.rightBarButtonItems = [barButton]
-        self.barButton.target = self
-        self.barButton.action = #selector(handleButtonTap)
+        viewInitialSettings()
 
         // ниже проверка интернет ресурсов
 //        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)

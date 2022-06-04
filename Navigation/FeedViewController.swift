@@ -9,35 +9,77 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    let postButton = UIButton()
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
+    let postButton1: UIButton = {
+        let button = UIButton()
+        button.setTitle("First post", for: .normal)
+        button.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
+
+        return button
+    }()
+
+    let postButton2: UIButton = {
+        let button = UIButton()
+        button.setTitle("Second post", for: .normal)
+        button.addTarget(self, action: #selector(handleButtonTap2), for: .touchUpInside)
+
+        return button
+    }()
 
     var post = Post(title: "Hot News")
+    var post2 = Post(title: "Cold News")
 
-    private func viewSettings() {
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.frame = CGRect.zero
+        stackView.backgroundColor = .cyan
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
+
+        return stackView
+    }()
+
+    private func viewInitialSettings() {
         self.title = "Feed"
         self.navigationController?.navigationBar.backgroundColor = .white
         self.view.backgroundColor = .darkGray
+
+        setupSubviews()
+        setupSubviewsLayout()
+    }
+
+    private func setupSubviews() {
+        stackView.addArrangedSubview(postButton1)
+        stackView.addArrangedSubview(postButton2)
+        self.view.addSubview(stackView)
+    }
+
+    private func setupSubviewsLayout() {
+
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+        ])
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        viewSettings()
-
-        self.postButton.setTitle("Press to see the post", for: .normal)
-        self.view.addSubview(postButton)
-        self.postButton.frame = CGRect(x: screenWidth/2 - 100, y: screenHeight/2 - 20, width: 200, height: 20)
-        self.postButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
-
+        viewInitialSettings()
     }
 
     @objc
     func handleButtonTap(){
         let postVC = PostViewController()
         postVC.title = post.title
+        self.navigationController?.pushViewController(postVC, animated: true)
+    }
+    @objc
+    func handleButtonTap2(){
+        let postVC = PostViewController()
+        postVC.title = post2.title
         self.navigationController?.pushViewController(postVC, animated: true)
     }
 

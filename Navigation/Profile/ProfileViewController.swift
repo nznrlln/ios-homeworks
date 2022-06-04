@@ -9,67 +9,51 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var profileHeaderView = ProfileHeaderView()
+    let profileHeaderView = ProfileHeaderView()
 
-    private func viewSettings() {
+    let profileButton: UIButton = {
+        let button = UIButton(frame: CGRect.zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Profile button", for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 10
+
+        return button
+    }()
+
+
+    private func viewInitialSettings() {
         self.title = "Profile"
         self.navigationController?.navigationBar.backgroundColor = .white
         self.view.backgroundColor = .lightGray
+
+        setupSubviews()
+        setupSubviewsLayout()
     }
 
-    private func subviewsSetting(){
-        profileHeaderView.addSubview(profileHeaderView.avatar)
-        profileHeaderView.addSubview(profileHeaderView.nickname)
-        profileHeaderView.addSubview(profileHeaderView.status)
-        profileHeaderView.addSubview(profileHeaderView.showStatusButton)
-        profileHeaderView.addSubview(profileHeaderView.textField)
+    private func setupSubviews() {
+        self.view.addSubview(profileHeaderView)
+        self.view.addSubview(profileButton)
     }
 
+    private func setupSubviewsLayout(){
+        NSLayoutConstraint.activate([
+            profileHeaderView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+
+            profileButton.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            profileButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            profileButton.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+        ]) // отдельный активатор привязок для кнопки или все в один объединять?
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        viewSettings()
-        subviewsSetting()
-
-        view.addSubview(profileHeaderView)
-
-    }
-
-    override func viewWillLayoutSubviews() {
-        // Для обычного layout используем viewDidLoad, методы override func viewWillLayoutSubviews() и didLayoutSubviews вызываются за время жизни контроллера много раз, не стоит заставлять движок autolayouta каждый раз пересчитывать его
-        super.viewWillLayoutSubviews()
-
-        profileHeaderView.frame = CGRect(
-            x: 0,
-            y: self.navigationController?.navigationBar.frame.maxY ?? 0,
-            width: view.frame.width,
-            height: view.frame.height - (self.navigationController?.navigationBar.frame.height ?? 0)
-        )
-
-        profileHeaderView.nickname.frame.size = CGSize(
-            width: profileHeaderView.frame.maxX - profileHeaderView.avatar.frame.maxX - 32,
-            height: 18
-        )
-
-        profileHeaderView.status.frame.size = CGSize(
-            width: profileHeaderView.frame.maxX - profileHeaderView.avatar.frame.maxX - 32,
-            height: 14
-        )
-
-        profileHeaderView.showStatusButton.frame.size = CGSize(
-            width: profileHeaderView.frame.maxX - 32,
-            height: 50
-        )
-
-        profileHeaderView.textField.frame.size = CGSize(
-            width: profileHeaderView.frame.maxX - profileHeaderView.avatar.frame.maxX - 32,
-            height: 40
-        )
-
-
-        //        profileHeaderView.backgroundColor = .systemBrown // для проверки загрузки
+        viewInitialSettings()
     }
 
 }
