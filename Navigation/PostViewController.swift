@@ -10,9 +10,11 @@ import UIKit
 class PostViewController: UIViewController {
 
     var postFromFeed = FeedViewController()
-    let barButton: UIBarButtonItem = {
+    private lazy var barButton: UIBarButtonItem = {
         let barButton = UIBarButtonItem()
         barButton.image = UIImage(systemName: "info.circle")
+        barButton.target = self
+        barButton.action = #selector(handleButtonTap)
 
         return barButton
     }()
@@ -27,8 +29,6 @@ class PostViewController: UIViewController {
 
     private func setupSubviews() {
         navigationItem.rightBarButtonItems = [barButton]
-        barButton.target = self
-        barButton.action = #selector(handleButtonTap)
     }
 
     private func setupSubviewsLayout() {}
@@ -46,8 +46,7 @@ class PostViewController: UIViewController {
 //        navigationItem.rightBarButtonItems = [add, play]
     }
 
-    @objc
-    func handleButtonTap() {
+    @objc private func handleButtonTap() {
         let infoVC = InfoViewController()
         self.present(infoVC, animated: true, completion: nil)
     }

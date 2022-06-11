@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
             profileButton.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             profileButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             profileButton.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-        ]) // отдельный активатор привязок для кнопки или все в один объединять?
+        ]) 
     }
 
     override func viewDidLoad() {

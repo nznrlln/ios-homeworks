@@ -9,11 +9,10 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    let closeButton: UIButton = {
+    private let closeButton: UIButton = {
         let closeButton = UIButton()
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.setTitle("Close info", for: .normal)
-        closeButton.frame = CGRect.zero
         closeButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
 
         return closeButton
@@ -46,8 +45,7 @@ class InfoViewController: UIViewController {
         viewInitialSettings()
     }
 
-    @objc
-    func handleButtonTap() {
+    @objc private func handleButtonTap() {
         let alert = UIAlertController(title: "Close info", message: "Do you want to close the info page?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             print("Cancel Action")
@@ -56,7 +54,7 @@ class InfoViewController: UIViewController {
             print("Close Action")
             self.dismiss(animated: true, completion: nil)
         }
-
+        
         alert.addAction(cancelAction)
         alert.addAction(closeAction)
 

@@ -18,22 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         let feedVC = FeedViewController()
-        let profileVC = ProfileViewController()
+        let loginVC = LogInViewController()
+
 
 
         let feedNC = UINavigationController(rootViewController: feedVC)
-        let profileNC = UINavigationController(rootViewController: profileVC)
+        let loginNC = UINavigationController(rootViewController: loginVC)
+
 
         feedNC.tabBarItem.title = "Feed"
         feedNC.tabBarItem.image = UIImage(systemName: "newspaper")
 
-        profileNC.tabBarItem.title = "Profile"
-        profileNC.tabBarItem.image = UIImage(systemName: "brain.head.profile")
+        loginNC.tabBarItem.title = "Profile"
+        loginNC.tabBarItem.image = UIImage(systemName: "brain.head.profile")
 
         let tabBarVC = UITabBarController()
         tabBarVC.viewControllers = [
             feedNC,
-            profileNC
+            loginNC
         ]
         tabBarVC.tabBar.backgroundColor = .white
 

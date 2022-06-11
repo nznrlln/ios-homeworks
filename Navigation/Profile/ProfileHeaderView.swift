@@ -13,7 +13,6 @@ class ProfileHeaderView: UIView {
         let avatar = UIImageView(image: UIImage(named: "sleeping cat"))
         avatar.translatesAutoresizingMaskIntoConstraints = false
         let radius: Double = 55
-        avatar.frame = CGRect.zero
         avatar.layer.cornerRadius = radius
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
@@ -28,7 +27,6 @@ class ProfileHeaderView: UIView {
         nickname.text = "Sleeping Cat"
         nickname.font = .systemFont(ofSize: 18, weight: .bold)
         nickname.textColor = .black
-        nickname.frame = CGRect.zero
 
         return nickname
     }()
@@ -39,7 +37,6 @@ class ProfileHeaderView: UIView {
         status.text = "ZzZzZzZzZzZzZzZz..."
         status.font = .systemFont(ofSize: 14, weight: .regular)
         status.textColor = .gray
-        status.frame = CGRect.zero
 
         return status
     }()
@@ -50,7 +47,6 @@ class ProfileHeaderView: UIView {
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
-        textField.frame = CGRect.zero
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
@@ -67,7 +63,6 @@ class ProfileHeaderView: UIView {
         showStatusButton.setTitleColor(.white, for: .normal)
         showStatusButton.backgroundColor = .blue
 
-        showStatusButton.frame = CGRect.zero
         showStatusButton.layer.cornerRadius = 14
         showStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
         showStatusButton.layer.shadowRadius = 4
@@ -129,7 +124,7 @@ class ProfileHeaderView: UIView {
 
     }
 
-    @objc func handleButtonTap() {
+    @objc private func handleButtonTap() {
         print(statusLabel.text ?? "Status is empty")
         guard let text = statusText else {
             print("Status field is empty. You need to add something first.")
@@ -140,7 +135,7 @@ class ProfileHeaderView: UIView {
         statusTextField.text = nil
     }
     // метод отвечающий за присвоение введенного на экране текста в statusText
-    @objc func statusTextChanged(_ statusTextField: UITextField) {
+    @objc private func statusTextChanged(_ statusTextField: UITextField) {
         statusText = statusTextField.text
     }
 }

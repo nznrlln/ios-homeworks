@@ -9,7 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    let postButton1: UIButton = {
+    private let postButton1: UIButton = {
         let button = UIButton()
         button.setTitle("First post", for: .normal)
         button.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
@@ -17,7 +17,7 @@ class FeedViewController: UIViewController {
         return button
     }()
 
-    let postButton2: UIButton = {
+    private let postButton2: UIButton = {
         let button = UIButton()
         button.setTitle("Second post", for: .normal)
         button.addTarget(self, action: #selector(handleButtonTap2), for: .touchUpInside)
@@ -28,10 +28,9 @@ class FeedViewController: UIViewController {
     var post = Post(title: "Hot News")
     var post2 = Post(title: "Cold News")
 
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.frame = CGRect.zero
         stackView.backgroundColor = .cyan
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
@@ -70,14 +69,12 @@ class FeedViewController: UIViewController {
         viewInitialSettings()
     }
 
-    @objc
-    func handleButtonTap(){
+    @objc private func handleButtonTap(){
         let postVC = PostViewController()
         postVC.title = post.title
         self.navigationController?.pushViewController(postVC, animated: true)
     }
-    @objc
-    func handleButtonTap2(){
+    @objc private func handleButtonTap2(){
         let postVC = PostViewController()
         postVC.title = post2.title
         self.navigationController?.pushViewController(postVC, animated: true)
