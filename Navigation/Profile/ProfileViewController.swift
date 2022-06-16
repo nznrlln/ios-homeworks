@@ -9,18 +9,25 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    let profileHeaderView = ProfileHeaderView()
+    private let posts = PostModel.makeModel()
 
-    let profileButton: UIButton = {
-        let button = UIButton(frame: CGRect.zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Profile button", for: .normal)
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 10
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.toAutoLayout()
+//        tableView.backgroundColor = .purple
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
 
-        return button
+        return tableView
     }()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        viewInitialSettings()
+    }
 
     private func viewInitialSettings() {
         self.title = "Profile"
@@ -32,28 +39,66 @@ class ProfileViewController: UIViewController {
     }
 
     private func setupSubviews() {
-        self.view.addSubview(profileHeaderView)
-        self.view.addSubview(profileButton)
+        self.view.addSubview(tableView)
     }
-
+    
     private func setupSubviewsLayout(){
+
         NSLayoutConstraint.activate([
-            profileHeaderView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            profileHeaderView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+        ])
 
-            profileButton.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            profileButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            profileButton.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-        ]) // отдельный активатор привязок для кнопки или все в один объединять?
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+}
 
-        // Do any additional setup after loading the view.
-        viewInitialSettings()
+// MARK: - UITableViewDataSource
+
+extension ProfileViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        posts.count
     }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+        cell.setupCell(model: posts[indexPath.row]) 
+
+        return cell
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension ProfileViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+
+    // метод для хедера
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let header = ProfileHeaderView()
+            NSLayoutConstraint.activate([
+                header.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+
+            ])
+            return header
+        }
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+
+        return footer
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
 }
