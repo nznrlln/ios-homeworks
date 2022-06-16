@@ -11,7 +11,7 @@ class PostTableViewCell: UITableViewCell {
 
     private let customContentView: UIView = {
         let customView = UIView()
-        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.toAutoLayout()
 //        customView.backgroundColor = .systemPink
 
         return customView
@@ -19,7 +19,7 @@ class PostTableViewCell: UITableViewCell {
 
     private let authorLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         label.numberOfLines = 2
@@ -29,7 +29,7 @@ class PostTableViewCell: UITableViewCell {
 
     private let postImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.toAutoLayout()
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFill
 
@@ -38,7 +38,7 @@ class PostTableViewCell: UITableViewCell {
 
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemGray
         label.numberOfLines = 0
@@ -48,7 +48,7 @@ class PostTableViewCell: UITableViewCell {
 
     private let likesCountLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
 
@@ -57,7 +57,7 @@ class PostTableViewCell: UITableViewCell {
 
     private let viewsCountLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
 

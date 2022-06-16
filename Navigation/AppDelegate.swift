@@ -20,11 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let feedVC = FeedViewController()
         let loginVC = LogInViewController()
 
-
-
         let feedNC = UINavigationController(rootViewController: feedVC)
         let loginNC = UINavigationController(rootViewController: loginVC)
-
 
         feedNC.tabBarItem.title = "Feed"
         feedNC.tabBarItem.image = UIImage(systemName: "newspaper")

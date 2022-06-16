@@ -30,7 +30,7 @@ class FeedViewController: UIViewController {
 
     private let stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         stackView.backgroundColor = .cyan
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally

@@ -130,8 +130,8 @@ class LogInViewController: UIViewController {
     }
 
     private func viewInitialSettings() {
-        self.title = "Log in"
-        self.navigationController?.navigationBar.backgroundColor = .systemBlue
+//        self.title = "Log in"
+//        self.navigationController?.navigationBar.backgroundColor = .systemBlue
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
 
@@ -140,10 +140,8 @@ class LogInViewController: UIViewController {
     }
 
     private func setupSubviews() {
-
-        [loginTextField, passwordTextField].forEach { loginStackView.addSubview($0) }
-
-        [logoImageView, loginStackView, logInButton].forEach { contentView.addSubview($0) }
+        loginStackView.addSubviews(loginTextField, passwordTextField)
+        contentView.addSubviews(logoImageView, loginStackView, logInButton)
         scrollView.addSubview(contentView)
         self.view.addSubview(scrollView)
     }
@@ -187,7 +185,6 @@ class LogInViewController: UIViewController {
             logInButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-
         ])
     }
 
@@ -211,6 +208,7 @@ class LogInViewController: UIViewController {
 
 }
 
+// MARK: - UITextFieldDelegate
 extension LogInViewController: UITextFieldDelegate {
         // срабатывает когда на клавиатуре нажимаем enter
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {

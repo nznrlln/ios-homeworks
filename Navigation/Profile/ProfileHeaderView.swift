@@ -11,9 +11,8 @@ class ProfileHeaderView: UIView {
 
     private let avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "sleeping cat"))
-        avatar.translatesAutoresizingMaskIntoConstraints = false
-        let radius: Double = 55
-        avatar.layer.cornerRadius = radius
+        avatar.toAutoLayout()
+        avatar.layer.cornerRadius = 55
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.clipsToBounds = true
@@ -23,7 +22,7 @@ class ProfileHeaderView: UIView {
 
     private let nicknameLabel: UILabel = {
         let nickname = UILabel()
-        nickname.translatesAutoresizingMaskIntoConstraints = false
+        nickname.toAutoLayout()
         nickname.text = "Sleeping Cat"
         nickname.font = .systemFont(ofSize: 18, weight: .bold)
         nickname.textColor = .black
@@ -33,7 +32,7 @@ class ProfileHeaderView: UIView {
 
     private let statusLabel: UILabel = {
         let status = UILabel()
-        status.translatesAutoresizingMaskIntoConstraints = false
+        status.toAutoLayout()
         status.text = "ZzZzZzZzZzZzZzZz..."
         status.font = .systemFont(ofSize: 14, weight: .regular)
         status.textColor = .gray
@@ -43,7 +42,7 @@ class ProfileHeaderView: UIView {
 
     private let statusTextField: CustomUITextField = {
         let textField = CustomUITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.toAutoLayout()
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
@@ -59,7 +58,7 @@ class ProfileHeaderView: UIView {
 
     private let showStatusButton: UIButton = {
         let showStatusButton = UIButton()
-        showStatusButton.translatesAutoresizingMaskIntoConstraints = false
+        showStatusButton.toAutoLayout()
         showStatusButton.setTitle("Show status", for: .normal)
         showStatusButton.setTitleColor(.white, for: .normal)
         showStatusButton.backgroundColor = .blue
@@ -78,11 +77,10 @@ class ProfileHeaderView: UIView {
     //переменная, которой автоматически будет присваивается значение "строки", введенного в uiTextField
     private var statusText: String? = nil
 
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemGray5
-        translatesAutoresizingMaskIntoConstraints = false
-        
+
         setupSubviews()
         setupSubviewsLayout()
     }
@@ -92,15 +90,14 @@ class ProfileHeaderView: UIView {
     }
 
     private func setupSubviews() {
-        [avatarImageView, nicknameLabel, statusLabel, statusTextField, showStatusButton].forEach {
-            self.addSubview($0)
-        }
+
+        self.addSubviews(avatarImageView, nicknameLabel, statusLabel, statusTextField, showStatusButton)
+
     }
     
     private func setupSubviewsLayout() {
 
         NSLayoutConstraint.activate([
-
 
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -123,6 +120,7 @@ class ProfileHeaderView: UIView {
             showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+
         ])
 
     }
@@ -134,7 +132,6 @@ class ProfileHeaderView: UIView {
             return
         } // чтобы не стереть исходный статус значением nil
         statusLabel.text = text
-//        statusLabel.text = statusText
         statusTextField.text = nil
     }
     // метод отвечающий за присвоение введенного на экране текста в statusText

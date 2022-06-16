@@ -11,7 +11,7 @@ class InfoViewController: UIViewController {
 
     private let closeButton: UIButton = {
         let closeButton = UIButton()
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.toAutoLayout()
         closeButton.setTitle("Close info", for: .normal)
         closeButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
 
