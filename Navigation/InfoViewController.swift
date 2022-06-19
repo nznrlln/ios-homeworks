@@ -10,18 +10,24 @@ import UIKit
 class InfoViewController: UIViewController {
 
     private let closeButton: UIButton = {
-        let closeButton = UIButton()
-        closeButton.toAutoLayout()
-        closeButton.setTitle("Close info", for: .normal)
-        closeButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
+        let button = UIButton()
+        button.toAutoLayout()
+        button.setTitle("Close info", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
 
-        return closeButton
+        return button
     }()
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
+
+    override func viewDidLoad() {
+           super.viewDidLoad()
+
+           // Do any additional setup after loading the view.
+           viewInitialSettings()
+       }
 
     private func viewInitialSettings() {
-        self.view.backgroundColor = .blue
+        self.view.backgroundColor = .systemGray4
 
         setupSubviews()
         setupSubviewsLayout()
@@ -38,12 +44,7 @@ class InfoViewController: UIViewController {
         ])
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        viewInitialSettings()
-    }
 
     @objc private func handleButtonTap() {
         let alert = UIAlertController(title: "Close info", message: "Do you want to close the info page?", preferredStyle: .alert)
@@ -58,7 +59,7 @@ class InfoViewController: UIViewController {
         alert.addAction(cancelAction)
         alert.addAction(closeAction)
 
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
 }

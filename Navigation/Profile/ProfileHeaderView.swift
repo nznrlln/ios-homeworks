@@ -79,7 +79,7 @@ class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .systemGray5
+        self.backgroundColor = .systemGray6
 
         setupSubviews()
         setupSubviewsLayout()

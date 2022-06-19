@@ -101,10 +101,7 @@ class PostTableViewCell: UITableViewCell {
     }
 
     private func setupSubviews() {
-
-        [authorLabel, postImageView, descriptionLabel, likesCountLabel, viewsCountLabel].forEach {
-            customContentView.addSubview($0)
-        }
+        customContentView.addSubviews(authorLabel, postImageView, descriptionLabel, likesCountLabel, viewsCountLabel)
         self.contentView.addSubview(customContentView)
     }
 

@@ -9,9 +9,24 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
+    var post = Post(title: "Hot News")
+    var post2 = Post(title: "Cold News")
+
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.toAutoLayout()
+//        stackView.backgroundColor = .cyan
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10
+
+        return stackView
+    }()
+
     private let postButton1: UIButton = {
         let button = UIButton()
         button.setTitle("First post", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
 
         return button
@@ -20,29 +35,23 @@ class FeedViewController: UIViewController {
     private let postButton2: UIButton = {
         let button = UIButton()
         button.setTitle("Second post", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(handleButtonTap2), for: .touchUpInside)
 
         return button
     }()
 
-    var post = Post(title: "Hot News")
-    var post2 = Post(title: "Cold News")
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.toAutoLayout()
-        stackView.backgroundColor = .cyan
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 10
-
-        return stackView
-    }()
+        // Do any additional setup after loading the view.
+        viewInitialSettings()
+    }
 
     private func viewInitialSettings() {
-        self.title = "Feed"
+        self.navigationItem.title = "Feed"
         self.navigationController?.navigationBar.backgroundColor = .white
-        self.view.backgroundColor = .darkGray
+        self.view.backgroundColor = .systemGray6
 
         setupSubviews()
         setupSubviewsLayout()
@@ -60,13 +69,6 @@ class FeedViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
         ])
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        viewInitialSettings()
     }
 
     @objc private func handleButtonTap(){

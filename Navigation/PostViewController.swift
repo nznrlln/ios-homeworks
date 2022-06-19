@@ -19,20 +19,6 @@ class PostViewController: UIViewController {
         return barButton
     }()
 
-
-    private func viewInitialSettings() {
-        self.view.backgroundColor = .systemBackground
-
-        setupSubviews()
-        setupSubviewsLayout()
-    }
-
-    private func setupSubviews() {
-        navigationItem.rightBarButtonItems = [barButton]
-    }
-
-    private func setupSubviewsLayout() {}
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +31,19 @@ class PostViewController: UIViewController {
 //
 //        navigationItem.rightBarButtonItems = [add, play]
     }
+    
+    private func viewInitialSettings() {
+        self.view.backgroundColor = .systemGray6
+
+        setupSubviews()
+        setupSubviewsLayout()
+    }
+
+    private func setupSubviews() {
+        navigationItem.rightBarButtonItems = [barButton]
+    }
+
+    private func setupSubviewsLayout() {}
 
     @objc private func handleButtonTap() {
         let infoVC = InfoViewController()

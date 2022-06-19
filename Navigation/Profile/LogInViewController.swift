@@ -130,10 +130,10 @@ class LogInViewController: UIViewController {
     }
 
     private func viewInitialSettings() {
-//        self.title = "Log in"
-//        self.navigationController?.navigationBar.backgroundColor = .systemBlue
+        self.navigationItem.title = "Log in"
+        self.navigationController?.navigationBar.backgroundColor = .lightGray
+        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.isHidden = true
 
         setupSubviews()
         setupSubviewsLayout()

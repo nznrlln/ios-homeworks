@@ -9,10 +9,10 @@ import UIKit
 
 extension UIView {
     // свойство самого типа UIView, которое будет подтягивать название файла, где описан UIView или какой либо из его наследников
-    static let identifier = String(describing: self)
-}
+    static var identifier: String {
+        String(describing: self)
+    }
 
-extension UIView {
     func toAutoLayout() {
         translatesAutoresizingMaskIntoConstraints = false
     }
