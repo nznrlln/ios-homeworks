@@ -18,7 +18,6 @@ class PhotosViewController: UIViewController {
         collectionView.toAutoLayout()
 //        collectionView.backgroundColor = .red
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
-
         collectionView.dataSource = self
         collectionView.delegate = self
 
@@ -78,26 +77,26 @@ extension PhotosViewController: UICollectionViewDataSource {
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
-    private var sideInset: CGFloat { return 8 }
-    private var verticalInset: CGFloat { return 8 }
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - sideInset * 4) / 3
-        let height = width
+        let photoWidth = (collectionView.bounds.width - (PhotoConstants.collectionLeadingInset + PhotoConstants.collectionTrailingInset + PhotoConstants.collectionItemSpacing * 2)) / 3
+        let photoHeight = photoWidth
 
-        return CGSize(width: width, height: height)
+        return CGSize(width: photoWidth, height: photoHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        verticalInset
+        PhotoConstants.collectionLineSpacing
     } // между элементами по вертикали
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        sideInset
+        PhotoConstants.collectionItemSpacing
     } // между элементами по горизонтали
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: verticalInset, left: sideInset, bottom: verticalInset, right: sideInset)
+        UIEdgeInsets(top: PhotoConstants.collectionTopInset,
+                     left: PhotoConstants.collectionLeadingInset,
+                     bottom: PhotoConstants.collectionBottomInset,
+                     right: PhotoConstants.collectionTrailingInset)
     } // отступы всех эелемнтов от границ collectionView
 
 }

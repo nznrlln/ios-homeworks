@@ -51,13 +51,11 @@ class MiniPhotosCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupSubviewsLayout() {
-
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             photoImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             photoImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-
         ])
     }
 

@@ -28,6 +28,7 @@
 		FDF3ADDB285E659700FF7292 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDA285E659600FF7292 /* PhotosViewController.swift */; };
 		FDF3ADDD285E6B5100FF7292 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDC285E6B5100FF7292 /* PhotosCollectionViewCell.swift */; };
 		FDF3ADDF285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDE285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift */; };
+		FDF3AE012865A8CD00FF7292 /* PhotoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3AE002865A8CD00FF7292 /* PhotoConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		FDF3ADDA285E659600FF7292 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		FDF3ADDC285E6B5100FF7292 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDF3ADDE285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		FDF3AE002865A8CD00FF7292 /* PhotoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		FDF3ADD9285E5C6100FF7292 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				FDF3AE002865A8CD00FF7292 /* PhotoConstants.swift */,
 				FD71F6DC285BC4BD00222F81 /* PhotoModel.swift */,
 				FD71F6DE285BC63200222F81 /* PhotosTableViewCell.swift */,
 				FDF3ADDE285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift */,
@@ -213,6 +216,7 @@
 				FDF3ADDD285E6B5100FF7292 /* PhotosCollectionViewCell.swift in Sources */,
 				FD71F65B2827E1B300222F81 /* ProfileHeaderView.swift in Sources */,
 				FD71F6542822FE0F00222F81 /* InfoViewController.swift in Sources */,
+				FDF3AE012865A8CD00FF7292 /* PhotoConstants.swift in Sources */,
 				FD71F6502822FD7E00222F81 /* ProfileViewController.swift in Sources */,
 				FD71F64E2822FD6600222F81 /* FeedViewController.swift in Sources */,
 				FD71F6A92854849D00222F81 /* LogInViewController.swift in Sources */,

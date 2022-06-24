@@ -25,25 +25,17 @@ class PostViewController: UIViewController {
         // Do any additional setup after loading the view.
         viewInitialSettings()
 
-        // ниже проверка интернет ресурсов
-//        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-//        let play = UIBarButtonItem(title: "Play", style: .plain, target: self, action: nil)
-//
-//        navigationItem.rightBarButtonItems = [add, play]
     }
     
     private func viewInitialSettings() {
         self.view.backgroundColor = .systemGray6
 
         setupSubviews()
-        setupSubviewsLayout()
     }
 
     private func setupSubviews() {
         navigationItem.rightBarButtonItems = [barButton]
     }
-
-    private func setupSubviewsLayout() {}
 
     @objc private func handleButtonTap() {
         let infoVC = InfoViewController()

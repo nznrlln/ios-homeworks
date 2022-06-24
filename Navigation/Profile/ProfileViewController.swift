@@ -45,7 +45,6 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupSubviewsLayout(){
-
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -53,6 +52,7 @@ class ProfileViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
     }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -77,7 +77,6 @@ extension ProfileViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
-//            cell.setupCell()
 
             return cell
         default:
