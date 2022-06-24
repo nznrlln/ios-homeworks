@@ -79,7 +79,7 @@ class ProfileHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .systemGray5
+        self.backgroundColor = .systemGray6
 
         setupSubviews()
         setupSubviewsLayout()
@@ -98,7 +98,6 @@ class ProfileHeaderView: UIView {
     private func setupSubviewsLayout() {
 
         NSLayoutConstraint.activate([
-
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 110),
@@ -120,7 +119,6 @@ class ProfileHeaderView: UIView {
             showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50),
-
         ])
 
     }

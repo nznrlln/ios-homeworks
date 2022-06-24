@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
 
         return tableView
     }()
@@ -30,8 +31,9 @@ class ProfileViewController: UIViewController {
     }
 
     private func viewInitialSettings() {
-        self.title = "Profile"
+        self.navigationItem.title = "Profile"
         self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .lightGray
 
         setupSubviews()
@@ -43,14 +45,12 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupSubviewsLayout(){
-
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
-
     }
 
 }
@@ -59,15 +59,33 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        posts.count
+        switch section {
+        case 0:
+            return 1
+        default:
+            return posts.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-        cell.setupCell(model: posts[indexPath.row]) 
 
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+            cell.setupCell(model: posts[indexPath.row])
+
+            return cell
+        }
+
     }
 }
 
@@ -78,27 +96,41 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
-
+    
+    
     // метод для хедера
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
+        switch section {
+        case 0:
             let header = ProfileHeaderView()
             NSLayoutConstraint.activate([
                 header.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-
             ])
             return header
+        default:
+            let header = UIView()
+            
+            return header
         }
-        return nil
     }
-
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView()
-
+        
         return footer
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        if indexPath.section == 0 {
+            let photosVC = PhotosViewController()
+            photosVC.navigationController?.isNavigationBarHidden = false
+            self.navigationController?.pushViewController(photosVC, animated: true)
+        }
     }
 }
