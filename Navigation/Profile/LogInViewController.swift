@@ -118,6 +118,8 @@ class LogInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.navigationController?.isNavigationBarHidden = true
+
         notificationCenter.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -132,7 +134,6 @@ class LogInViewController: UIViewController {
     private func viewInitialSettings() {
         self.navigationItem.title = "Log in"
         self.navigationController?.navigationBar.backgroundColor = .lightGray
-        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .white
 
         setupSubviews()

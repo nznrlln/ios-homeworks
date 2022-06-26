@@ -30,10 +30,15 @@ class ProfileViewController: UIViewController {
         viewInitialSettings()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.navigationController?.isNavigationBarHidden = true
+    }
+
     private func viewInitialSettings() {
         self.navigationItem.title = "Profile"
         self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .lightGray
 
         setupSubviews()
@@ -103,9 +108,7 @@ extension ProfileViewController: UITableViewDelegate {
         switch section {
         case 0:
             let header = ProfileHeaderView()
-            NSLayoutConstraint.activate([
-                header.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-            ])
+
             return header
         default:
             let header = UIView()
@@ -134,3 +137,4 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
 }
+
