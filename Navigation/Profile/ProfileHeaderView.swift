@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileHeaderView: UIView {
 
+    private var avatarInitialFrame: CGRect?
+
     private let avatarImageView: UIImageView = {
         let avatar = UIImageView(image: UIImage(named: "sleeping cat"))
         avatar.toAutoLayout()
@@ -16,6 +18,7 @@ class ProfileHeaderView: UIView {
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = UIColor.white.cgColor
         avatar.clipsToBounds = true
+        avatar.isUserInteractionEnabled = true
 
         return avatar
     }()
@@ -77,12 +80,36 @@ class ProfileHeaderView: UIView {
     //переменная, которой автоматически будет присваивается значение "строки", введенного в uiTextField
     private var statusText: String? = nil
 
+    private var backgroundInitialFrame: CGRect?
+
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.toAutoLayout()
+        view.backgroundColor = .lightGray
+        view.alpha = 0
+        view.isHidden = true
+
+        return view
+    }()
+
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.toAutoLayout()
+        button.setImage(UIImage(systemName: "x.circle"), for: .normal)
+        button.alpha = 1
+        button.isHidden = true
+        button.addTarget(self, action: #selector(tapCloseButton), for: .touchUpInside)
+
+        return button
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .systemGray6
 
         setupSubviews()
         setupSubviewsLayout()
+        setupGestures()
     }
 
     required init?(coder: NSCoder) {
@@ -90,9 +117,7 @@ class ProfileHeaderView: UIView {
     }
 
     private func setupSubviews() {
-
-        self.addSubviews(avatarImageView, nicknameLabel, statusLabel, statusTextField, showStatusButton)
-
+        self.addSubviews(nicknameLabel, statusLabel, statusTextField, showStatusButton, backgroundView, avatarImageView, closeButton)
     }
     
     private func setupSubviewsLayout() {
@@ -119,8 +144,20 @@ class ProfileHeaderView: UIView {
             showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
 
+            backgroundView.topAnchor.constraint(equalTo: self.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+
+            closeButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        ])
+    }
+
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        avatarImageView.addGestureRecognizer(tapGesture)
     }
 
     @objc private func handleButtonTap() {
@@ -136,4 +173,52 @@ class ProfileHeaderView: UIView {
     @objc private func statusTextChanged(_ statusTextField: UITextField) {
         statusText = statusTextField.text
     }
+
+    @objc private func tapAction() {
+        debugPrint(#function)
+
+        self.avatarInitialFrame = self.avatarImageView.frame
+        self.backgroundInitialFrame = self.backgroundView.frame
+        let avatarGrowthRate: CGFloat = UIScreen.main.bounds.width / self.avatarInitialFrame!.width
+        let backgroundXRate: CGFloat = UIScreen.main.bounds.width / self.backgroundInitialFrame!.width
+        let backgroundYRate: CGFloat = UIScreen.main.bounds.height / self.backgroundInitialFrame!.height
+
+        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseInOut) {
+            self.backgroundView.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+            self.backgroundView.transform = CGAffineTransform(scaleX: backgroundXRate, y: backgroundYRate)
+            self.backgroundView.isHidden = false
+            self.backgroundView.alpha = 0.8
+
+            self.avatarImageView.center = self.backgroundView.center
+            self.avatarImageView.transform = CGAffineTransform(scaleX: avatarGrowthRate, y: avatarGrowthRate)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.closeButton.isHidden = false
+                self.closeButton.alpha = 1
+                self.avatarImageView.layer.cornerRadius = 0
+            }
+        }
+    }
+
+    @objc private func tapCloseButton() {
+        debugPrint(#function)
+
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) {
+            self.closeButton.alpha = 0
+        } completion: { _ in
+            self.closeButton.isHidden = true
+            UIView.animate(withDuration: 0.5) {
+                self.backgroundView.alpha = 0
+                self.backgroundView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.backgroundView.frame = self.backgroundInitialFrame!
+
+                self.avatarImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.avatarImageView.layer.cornerRadius = self.avatarInitialFrame!.height / 2
+                self.avatarImageView.frame = self.avatarInitialFrame!
+            } completion: { _ in
+                self.backgroundView.isHidden = true
+            }
+        }
+    }
+
 }
