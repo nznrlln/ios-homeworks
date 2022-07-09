@@ -14,7 +14,8 @@ class ProfileViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.toAutoLayout()
-//        tableView.backgroundColor = .purple
+        tableView.backgroundColor = self.view.backgroundColor
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
@@ -39,7 +40,13 @@ class ProfileViewController: UIViewController {
     private func viewInitialSettings() {
         self.navigationItem.title = "Profile"
         self.navigationController?.navigationBar.backgroundColor = .white
+//        self.view.backgroundColor = .lightGray
+
+        #if DEBUG
         self.view.backgroundColor = .lightGray
+        #else
+        self.view.backgroundColor = .red
+        #endif
 
         setupSubviews()
         setupSubviewsLayout()
@@ -108,18 +115,15 @@ extension ProfileViewController: UITableViewDelegate {
         switch section {
         case 0:
             let header = ProfileHeaderView()
-
             return header
         default:
             let header = UIView()
-            
             return header
         }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = UIView()
-        
         return footer
     }
     
