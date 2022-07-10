@@ -38,14 +38,14 @@ class ProfileViewController: UIViewController {
     }
 
     private func viewInitialSettings() {
-        self.navigationItem.title = "Profile"
-        self.navigationController?.navigationBar.backgroundColor = .white
-//        self.view.backgroundColor = .lightGray
+        navigationItem.title = "Profile"
+        navigationController?.navigationBar.backgroundColor = .white
+//        view.backgroundColor = .lightGray
 
         #if DEBUG
-        self.view.backgroundColor = .lightGray
+            view.backgroundColor = .lightGray
         #else
-        self.view.backgroundColor = .red
+            view.backgroundColor = .systemGray6
         #endif
 
         setupSubviews()
@@ -53,15 +53,15 @@ class ProfileViewController: UIViewController {
     }
 
     private func setupSubviews() {
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
     }
     
     private func setupSubviewsLayout(){
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 

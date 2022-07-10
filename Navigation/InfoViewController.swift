@@ -27,20 +27,20 @@ class InfoViewController: UIViewController {
        }
 
     private func viewInitialSettings() {
-        self.view.backgroundColor = .systemGray4
+        view.backgroundColor = .systemGray4
 
         setupSubviews()
         setupSubviewsLayout()
     }
 
     private func setupSubviews() {
-        self.view.addSubview(closeButton)
+        view.addSubview(closeButton)
     }
 
     private func setupSubviewsLayout() {
         NSLayoutConstraint.activate([
-            closeButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            closeButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            closeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 

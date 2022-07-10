@@ -102,7 +102,7 @@ class PostTableViewCell: UITableViewCell {
 
     private func setupSubviews() {
         customContentView.addSubviews(authorLabel, postImageView, descriptionLabel, likesCountLabel, viewsCountLabel)
-        self.contentView.addSubview(customContentView)
+        contentView.addSubview(customContentView)
     }
 
     private func setupSubviewsLayout(){
@@ -111,10 +111,10 @@ class PostTableViewCell: UITableViewCell {
         let imageInset: CGFloat = 12
 
         NSLayoutConstraint.activate([
-            customContentView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            customContentView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            customContentView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            customContentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            customContentView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            customContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            customContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            customContentView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             authorLabel.topAnchor.constraint(equalTo: customContentView.topAnchor, constant: textInset),
             authorLabel.leadingAnchor.constraint(equalTo: customContentView.leadingAnchor, constant: textInset),

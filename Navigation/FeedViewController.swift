@@ -50,9 +50,9 @@ class FeedViewController: UIViewController {
     }
 
     private func viewInitialSettings() {
-        self.navigationItem.title = "Feed"
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.view.backgroundColor = .systemGray6
+        navigationItem.title = "Feed"
+        navigationController?.navigationBar.backgroundColor = .white
+        view.backgroundColor = .systemGray6
 
         setupSubviews()
         setupSubviewsLayout()
@@ -61,23 +61,23 @@ class FeedViewController: UIViewController {
     private func setupSubviews() {
         stackView.addArrangedSubview(postButton1)
         stackView.addArrangedSubview(postButton2)
-        self.view.addSubview(stackView)
+        view.addSubview(stackView)
     }
 
     private func setupSubviewsLayout() {
 
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+            stackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
         ])
     }
 
-    @objc private func handleButtonTap(){
+    @objc private func handleButtonTap() {
         let postVC = PostViewController()
         postVC.title = post.title
         self.navigationController?.pushViewController(postVC, animated: true)
     }
-    @objc private func handleButtonTap2(){
+    @objc private func handleButtonTap2() {
         let postVC = PostViewController()
         postVC.title = post2.title
         self.navigationController?.pushViewController(postVC, animated: true)

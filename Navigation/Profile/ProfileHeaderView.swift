@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView {
 
@@ -122,37 +123,42 @@ class ProfileHeaderView: UIView {
     
     private func setupSubviewsLayout() {
 
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 110),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 110),
+        avatarImageView.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(16)
+            make.width.height.equalTo(110)
+        }
 
-            nicknameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-            nicknameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+        nicknameLabel.snp.makeConstraints { make in
+            make.topMargin.equalToSuperview().inset(27)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+        }
 
-            statusLabel.leadingAnchor.constraint(equalTo: nicknameLabel.leadingAnchor),
-            statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -32),
+        statusLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nicknameLabel.snp.leading)
+            make.bottom.equalTo(avatarImageView.snp.bottom).inset(32)
+        }
 
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
-            statusTextField.leadingAnchor.constraint(equalTo: nicknameLabel.leadingAnchor),
-            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+        statusTextField.snp.makeConstraints { make in
+            make.top.equalTo(statusLabel.snp.bottom).offset(8)
+            make.leading.equalTo(nicknameLabel.snp.leading)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(40)
+        }
 
-            showStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
-            showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+        showStatusButton.snp.makeConstraints { make in
+            make.top.equalTo(statusTextField.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(16)
+            make.height.equalTo(50)
+        }
 
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+        backgroundView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
 
-            closeButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            closeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-        ])
+        closeButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(16)
+        }
     }
 
     private func setupGestures() {

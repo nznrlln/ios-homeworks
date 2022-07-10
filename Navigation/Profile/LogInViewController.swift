@@ -132,9 +132,9 @@ class LogInViewController: UIViewController {
     }
 
     private func viewInitialSettings() {
-        self.navigationItem.title = "Log in"
-        self.navigationController?.navigationBar.backgroundColor = .lightGray
-        self.view.backgroundColor = .white
+        navigationItem.title = "Log in"
+        navigationController?.navigationBar.backgroundColor = .lightGray
+        view.backgroundColor = .white
 
         setupSubviews()
         setupSubviewsLayout()
@@ -144,16 +144,16 @@ class LogInViewController: UIViewController {
         loginStackView.addSubviews(loginTextField, passwordTextField)
         contentView.addSubviews(logoImageView, loginStackView, logInButton)
         scrollView.addSubview(contentView)
-        self.view.addSubview(scrollView)
+        view.addSubview(scrollView)
     }
 
     private func setupSubviewsLayout() {
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),

@@ -28,13 +28,13 @@ class PostViewController: UIViewController {
     }
     
     private func viewInitialSettings() {
-        self.view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemGray6
 
         setupSubviews()
     }
 
     private func setupSubviews() {
-        navigationItem.rightBarButtonItems = [barButton]
+        self.navigationItem.rightBarButtonItems = [barButton]
     }
 
     @objc private func handleButtonTap() {
