@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
 
@@ -76,11 +77,24 @@ class PostTableViewCell: UITableViewCell {
 
     func setupCell(model: PostModel) {
         authorLabel.text = model.author
-        postImageView.image = UIImage(named: model.imageName)
+//        postImageView.image = UIImage(named: model.imageName)
+        postImageView.image = filterImage(UIImage(named: model.imageName)!)
+
         descriptionLabel.text = model.description
         likesCountLabel.text = "Likes: \(model.likes)"
         viewsCountLabel.text = "Views: \(model.views)"
     }
+
+    private func filterImage(_ initialImage: UIImage) -> UIImage {
+        var image = UIImage()
+        let imageProcessor = ImageProcessor()
+        imageProcessor.processImage(sourceImage: initialImage, filter: .crystallize(radius: 1)) { filteredImage in
+            image = filteredImage ?? UIImage()
+            debugPrint("Filter applied successfuly")
+        }
+        return image
+    }
+
 
     // метод подготавливающий ячейку для переисползования
     override func prepareForReuse() {

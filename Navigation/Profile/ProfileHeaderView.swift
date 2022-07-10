@@ -73,7 +73,7 @@ class ProfileHeaderView: UIView {
         showStatusButton.layer.shadowColor = UIColor.black.cgColor
         showStatusButton.layer.shadowOpacity = 0.7
 
-        showStatusButton.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
+        showStatusButton.addTarget(self, action: #selector(tapStatusButton), for: .touchUpInside)
 
         return showStatusButton
     }()
@@ -162,11 +162,11 @@ class ProfileHeaderView: UIView {
     }
 
     private func setupGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        avatarImageView.addGestureRecognizer(tapGesture)
+        let avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapAction))
+        avatarImageView.addGestureRecognizer(avatarTapGesture)
     }
 
-    @objc private func handleButtonTap() {
+    @objc private func tapStatusButton() {
         print(statusLabel.text ?? "Status is empty")
         guard let text = statusText else {
             print("Status field is empty. You need to add something first.")
@@ -180,7 +180,7 @@ class ProfileHeaderView: UIView {
         statusText = statusTextField.text
     }
 
-    @objc private func tapAction() {
+    @objc private func avatarTapAction() {
         debugPrint(#function)
 
         self.avatarInitialFrame = self.avatarImageView.frame
