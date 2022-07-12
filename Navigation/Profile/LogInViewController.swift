@@ -13,14 +13,14 @@ class LogInViewController: UIViewController {
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.toAutoLayout()
 
         return scrollView
     }()
 
     private let contentView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.toAutoLayout()
         view.backgroundColor = .white
 
         return view
@@ -28,14 +28,14 @@ class LogInViewController: UIViewController {
 
     private let logoImageView: UIImageView = {
         let logo = UIImageView(image: UIImage(named: "vkLogo"))
-        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.toAutoLayout()
 
         return logo
     }()
 
     private lazy var loginTextField: CustomUITextField = {
         let textField = CustomUITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.toAutoLayout()
         textField.backgroundColor = .systemGray6
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
@@ -46,13 +46,14 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
 
         textField.delegate = self
+        textField.addTarget(self, action: #selector(loginTextChanged(_:)), for: .editingChanged)
 
         return textField
     }()
 
     private lazy var passwordTextField: CustomUITextField = {
         let textField = CustomUITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.toAutoLayout()
         textField.backgroundColor = .systemGray6
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
@@ -70,22 +71,21 @@ class LogInViewController: UIViewController {
 
     private let loginStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         stackView.backgroundColor = .cyan
         stackView.layer.borderColor = UIColor.lightGray.cgColor
         stackView.layer.borderWidth = 0.5
         stackView.layer.cornerRadius = 10
         stackView.clipsToBounds = true
-
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
 
         return stackView
     }()
 
-    private let logInButton: UIButton = {
+    private lazy var logInButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.backgroundColor = UIColor(named: "ColorSet")
@@ -102,11 +102,13 @@ class LogInViewController: UIViewController {
         button.setTitle("Log in", for: .normal)
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont(name: "default", size: 17)
-
-        button.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginButtonTap), for: .touchUpInside)
 
         return button
     }()
+
+    private var loginText: String? = nil
+    private var passwordText: String? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -202,9 +204,19 @@ class LogInViewController: UIViewController {
     }
 
 
-    @objc private func handleButtonTap(){
-        let profileVC = ProfileViewController()
+    @objc private func loginButtonTap(){
+        #if DEBUG
+            let currentUser = TestUserService()
+        #else
+            let currentUser = CurrentUserService()
+        #endif
+        let userID = loginText ?? ""
+        let profileVC = ProfileViewController(userService: currentUser, userID: userID)
         self.navigationController?.pushViewController(profileVC, animated: true)
+    }
+
+    @objc private func loginTextChanged(_ loginTextField: UITextField) {
+        loginText = loginTextField.text
     }
 
 }

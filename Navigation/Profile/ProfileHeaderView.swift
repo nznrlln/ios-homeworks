@@ -44,7 +44,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
 
-    private let statusTextField: CustomUITextField = {
+    private lazy var statusTextField: CustomUITextField = {
         let textField = CustomUITextField()
         textField.toAutoLayout()
         textField.backgroundColor = .white
@@ -60,7 +60,7 @@ class ProfileHeaderView: UIView {
         return textField
     }()
 
-    private let showStatusButton: UIButton = {
+    private lazy var showStatusButton: UIButton = {
         let showStatusButton = UIButton()
         showStatusButton.toAutoLayout()
         showStatusButton.setTitle("Show status", for: .normal)
@@ -93,7 +93,7 @@ class ProfileHeaderView: UIView {
         return view
     }()
 
-    private let closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.toAutoLayout()
         button.setImage(UIImage(systemName: "x.circle"), for: .normal)

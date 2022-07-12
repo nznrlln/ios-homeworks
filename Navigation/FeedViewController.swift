@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
         return stackView
     }()
 
-    private let postButton1: UIButton = {
+    private lazy var postButton1: UIButton = {
         let button = UIButton()
         button.setTitle("First post", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -33,7 +33,7 @@ class FeedViewController: UIViewController {
         return button
     }()
 
-    private let postButton2: UIButton = {
+    private lazy var postButton2: UIButton = {
         let button = UIButton()
         button.setTitle("Second post", for: .normal)
         button.setTitleColor(.black, for: .normal)
