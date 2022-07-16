@@ -11,6 +11,8 @@ class ProfileViewController: UIViewController {
 
     private let posts = PostModel.makeModel()
 
+    var userService: UserService?
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.toAutoLayout()
@@ -23,6 +25,15 @@ class ProfileViewController: UIViewController {
 
         return tableView
     }()
+
+    init(userService: UserService, userID: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.showUserData(userService: userService, userID: userID)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +74,26 @@ class ProfileViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+
+    private func showUserData(userService: UserService, userID: String) {
+        if let userData = userService.checkUser(userID: userID) {
+            print("User ID: \(userData.userID)")
+            if userData.userAvatar != nil {
+                print("User avatar: true")
+            } else {
+                print("User avatar: false")
+            }
+            if userData.userStatus != nil {
+                print("User status: true")
+            } else {
+                print("User status: false")
+            }
+
+            self.userService = userService
+        } else {
+            print("Auth failed")
+        }
     }
 
 }

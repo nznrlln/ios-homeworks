@@ -9,7 +9,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    private let closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.toAutoLayout()
         button.setTitle("Close info", for: .normal)
