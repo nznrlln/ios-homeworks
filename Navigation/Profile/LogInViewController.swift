@@ -210,8 +210,8 @@ class LogInViewController: UIViewController {
         #else
             let currentUser = CurrentUserService()
         #endif
-        let userID = loginText ?? ""
-        let profileVC = ProfileViewController(userService: currentUser, userID: userID)
+        let loginUsername = loginText ?? ""
+        let profileVC = ProfileViewController(userService: currentUser, userID: loginUsername)
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
 
