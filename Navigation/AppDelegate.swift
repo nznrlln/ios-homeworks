@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let feedVC = FeedViewController()
         let loginVC = LogInViewController()
+        loginVC.delegate = LoginInspector()
 
         let feedNC = UINavigationController(rootViewController: feedVC)
         let loginNC = UINavigationController(rootViewController: loginVC)

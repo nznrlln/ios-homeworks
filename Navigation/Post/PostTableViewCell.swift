@@ -90,7 +90,7 @@ class PostTableViewCell: UITableViewCell {
         let imageProcessor = ImageProcessor()
         imageProcessor.processImage(sourceImage: initialImage, filter: .crystallize(radius: 1)) { filteredImage in
             image = filteredImage ?? UIImage()
-            debugPrint("Filter applied successfully")
+            // debugPrint("Filter applied successfully")
         }
         return image
     }
