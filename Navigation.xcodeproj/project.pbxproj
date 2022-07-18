@@ -39,6 +39,9 @@
 		FDA1EBA2287CB0CB008DB36D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBA1287CB0CB008DB36D /* UserService.swift */; };
 		FDA1EBA4287CB191008DB36D /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBA3287CB191008DB36D /* CurrentUserService.swift */; };
 		FDA1EBA8287E0EAD008DB36D /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBA7287E0EAD008DB36D /* TestUserService.swift */; };
+		FDA1EBAB2883E392008DB36D /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBAA2883E392008DB36D /* Checker.swift */; };
+		FDA1EBAD2883F1D9008DB36D /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBAC2883F1D9008DB36D /* LoginInspector.swift */; };
+		FDA1EBB128847102008DB36D /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBB028847102008DB36D /* LoginFactory.swift */; };
 		FDF3ADDB285E659700FF7292 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDA285E659600FF7292 /* PhotosViewController.swift */; };
 		FDF3ADDD285E6B5100FF7292 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDC285E6B5100FF7292 /* PhotosCollectionViewCell.swift */; };
 		FDF3ADDF285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDE285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift */; };
@@ -122,6 +125,9 @@
 		FDA1EBA1287CB0CB008DB36D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FDA1EBA3287CB191008DB36D /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		FDA1EBA7287E0EAD008DB36D /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		FDA1EBAA2883E392008DB36D /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		FDA1EBAC2883F1D9008DB36D /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		FDA1EBB028847102008DB36D /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		FDF3ADDA285E659600FF7292 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		FDF3ADDC285E6B5100FF7292 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDF3ADDE285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -238,6 +244,9 @@
 				FD71F6572827E15E00222F81 /* Profile */,
 				FDF3ADD9285E5C6100FF7292 /* Photos */,
 				FDA1EBA9287E0EB2008DB36D /* User */,
+				FDA1EBAC2883F1D9008DB36D /* LoginInspector.swift */,
+				FDA1EBAE288470BF008DB36D /* Singleton */,
+				FDA1EBAF288470DC008DB36D /* Factory */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -272,6 +281,22 @@
 				FDA1EBA7287E0EAD008DB36D /* TestUserService.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		FDA1EBAE288470BF008DB36D /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				FDA1EBAA2883E392008DB36D /* Checker.swift */,
+			);
+			path = Singleton;
+			sourceTree = "<group>";
+		};
+		FDA1EBAF288470DC008DB36D /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				FDA1EBB028847102008DB36D /* LoginFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		FDF3ADD9285E5C6100FF7292 /* Photos */ = {
@@ -543,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA1EBB128847102008DB36D /* LoginFactory.swift in Sources */,
 				FD7A5C97287235400000D1F6 /* PostViewController.swift in Sources */,
 				FDF3ADDB285E659700FF7292 /* PhotosViewController.swift in Sources */,
 				FD71F6DD285BC4BD00222F81 /* PhotoModel.swift in Sources */,
@@ -556,9 +582,11 @@
 				FDA1EBA4287CB191008DB36D /* CurrentUserService.swift in Sources */,
 				FD71F6AD2855246000222F81 /* CustomUITextField.swift in Sources */,
 				FDF3ADDD285E6B5100FF7292 /* PhotosCollectionViewCell.swift in Sources */,
+				FDA1EBAB2883E392008DB36D /* Checker.swift in Sources */,
 				FD71F65B2827E1B300222F81 /* ProfileHeaderView.swift in Sources */,
 				FDF3AE012865A8CD00FF7292 /* PhotoConstants.swift in Sources */,
 				FDA1EBA8287E0EAD008DB36D /* TestUserService.swift in Sources */,
+				FDA1EBAD2883F1D9008DB36D /* LoginInspector.swift in Sources */,
 				FDA1EBA2287CB0CB008DB36D /* UserService.swift in Sources */,
 				FD71F6502822FD7E00222F81 /* ProfileViewController.swift in Sources */,
 				FD7A5C98287235400000D1F6 /* PostModel.swift in Sources */,

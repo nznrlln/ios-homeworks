@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
+    var delegate: LoginViewControllerDelegate?
+
     private let notificationCenter = NotificationCenter.default
 
     private let scrollView: UIScrollView = {
@@ -33,7 +35,7 @@ class LogInViewController: UIViewController {
         return logo
     }()
 
-    private lazy var loginTextField: CustomUITextField = {
+    private lazy var usernameTextField: CustomUITextField = {
         let textField = CustomUITextField()
         textField.toAutoLayout()
         textField.backgroundColor = .systemGray6
@@ -46,7 +48,7 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
 
         textField.delegate = self
-        textField.addTarget(self, action: #selector(loginTextChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(usernameTextChanged), for: .editingChanged)
 
         return textField
     }()
@@ -65,6 +67,8 @@ class LogInViewController: UIViewController {
         textField.isSecureTextEntry = true
 
         textField.delegate = self
+        textField.addTarget(self, action: #selector(passwordTextChanged), for: .editingChanged)
+
 
         return textField
     }()
@@ -107,7 +111,7 @@ class LogInViewController: UIViewController {
         return button
     }()
 
-    private var loginText: String? = nil
+    private var usernameText: String? = nil
     private var passwordText: String? = nil
 
     override func viewDidLoad() {
@@ -143,7 +147,7 @@ class LogInViewController: UIViewController {
     }
 
     private func setupSubviews() {
-        loginStackView.addSubviews(loginTextField, passwordTextField)
+        loginStackView.addSubviews(usernameTextField, passwordTextField)
         contentView.addSubviews(logoImageView, loginStackView, logInButton)
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
@@ -173,12 +177,12 @@ class LogInViewController: UIViewController {
             loginStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             loginStackView.heightAnchor.constraint(equalToConstant: 100),
 
-            loginTextField.topAnchor.constraint(equalTo: loginStackView.topAnchor),
-            loginTextField.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
-            loginTextField.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
-            loginTextField.bottomAnchor.constraint(equalTo: loginStackView.centerYAnchor),
+            usernameTextField.topAnchor.constraint(equalTo: loginStackView.topAnchor),
+            usernameTextField.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
+            usernameTextField.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
+            usernameTextField.bottomAnchor.constraint(equalTo: loginStackView.centerYAnchor),
 
-            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: loginStackView.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: loginStackView.trailingAnchor),
             passwordTextField.bottomAnchor.constraint(equalTo: loginStackView.bottomAnchor),
@@ -205,18 +209,42 @@ class LogInViewController: UIViewController {
 
 
     @objc private func loginButtonTap(){
-        #if DEBUG
-            let currentUser = TestUserService()
-        #else
-            let currentUser = CurrentUserService()
-        #endif
-        let loginUsername = loginText ?? ""
-        let profileVC = ProfileViewController(userService: currentUser, userID: loginUsername)
-        self.navigationController?.pushViewController(profileVC, animated: true)
+//        #if DEBUG
+//            let currentUser = TestUserService()
+//        #else
+//            let currentUser = CurrentUserService()
+//        #endif
+////        let loginUsername = usernameText ?? ""
+//        let loginUsername = usernameTextField.text!
+//
+//        let profileVC = ProfileViewController(userService: currentUser, userID: loginUsername)
+//        self.navigationController?.pushViewController(profileVC, animated: true)
+
+        guard let auth = delegate?.check(username: usernameTextField.text!, password: passwordTextField.text!) else {
+            print("nil")
+            return
+        }
+        if auth {
+            #if DEBUG
+                let currentUser = TestUserService()
+            #else
+                let currentUser = CurrentUserService()
+            #endif
+            let loginUsername = usernameTextField.text!
+            let profileVC = ProfileViewController(userService: currentUser, userID: loginUsername)
+            self.navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            print("no auth")
+            return
+        }
     }
 
-    @objc private func loginTextChanged(_ loginTextField: UITextField) {
-        loginText = loginTextField.text
+    @objc private func usernameTextChanged(_ usernameTextField: UITextField) {
+        usernameText = usernameTextField.text
+    }
+
+    @objc private func passwordTextChanged(_ passwordTextField: UITextField) {
+        passwordText = passwordTextField.text
     }
 
 }
@@ -229,3 +257,10 @@ extension LogInViewController: UITextFieldDelegate {
             return true
         }
     }
+
+
+// MARK: - LoginViewControllerDelegate
+
+protocol LoginViewControllerDelegate: AnyObject {
+    func check(username: String, password: String) -> Bool 
+}
