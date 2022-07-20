@@ -42,6 +42,7 @@
 		FDA1EBAB2883E392008DB36D /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBAA2883E392008DB36D /* Checker.swift */; };
 		FDA1EBAD2883F1D9008DB36D /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBAC2883F1D9008DB36D /* LoginInspector.swift */; };
 		FDA1EBB128847102008DB36D /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA1EBB028847102008DB36D /* LoginFactory.swift */; };
+		FDA1EBB4288876F5008DB36D /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = FDA1EBB3288876F5008DB36D /* iOSIntPackage */; };
 		FDF3ADDB285E659700FF7292 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDA285E659600FF7292 /* PhotosViewController.swift */; };
 		FDF3ADDD285E6B5100FF7292 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDC285E6B5100FF7292 /* PhotosCollectionViewCell.swift */; };
 		FDF3ADDF285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3ADDE285FA15A00FF7292 /* MiniPhotosCollectionViewCell.swift */; };
@@ -159,6 +160,7 @@
 				FDA1EB9C287ADBE2008DB36D /* iOSIntPackage in Frameworks */,
 				FD342F2A2872274000E8A398 /* StorageService.framework in Frameworks */,
 				ED9182082F94AF0DEEB06ACD /* Pods_Navigation.framework in Frameworks */,
+				FDA1EBB4288876F5008DB36D /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,11 +242,11 @@
 				FD71F63D2821854700222F81 /* Info.plist */,
 				FD71F6AC2855246000222F81 /* CustomUITextField.swift */,
 				FD71F6B22855487700222F81 /* UIView+Extention.swift */,
+				FDA1EBAC2883F1D9008DB36D /* LoginInspector.swift */,
 				FD7A5C99287235500000D1F6 /* Post */,
 				FD71F6572827E15E00222F81 /* Profile */,
 				FDF3ADD9285E5C6100FF7292 /* Photos */,
 				FDA1EBA9287E0EB2008DB36D /* User */,
-				FDA1EBAC2883F1D9008DB36D /* LoginInspector.swift */,
 				FDA1EBAE288470BF008DB36D /* Singleton */,
 				FDA1EBAF288470DC008DB36D /* Factory */,
 			);
@@ -384,6 +386,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				FDA1EB9B287ADBE2008DB36D /* iOSIntPackage */,
+				FDA1EBB3288876F5008DB36D /* iOSIntPackage */,
 			);
 			productName = Navigation;
 			productReference = FD71F62C2821854600222F81 /* Navigation.app */;
@@ -422,6 +425,7 @@
 			mainGroup = FD71F6232821854600222F81;
 			packageReferences = (
 				FDA1EB9A287ADBE2008DB36D /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				FDA1EBB2288876F5008DB36D /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 			);
 			productRefGroup = FD71F62D2821854600222F81 /* Products */;
 			projectDirPath = "";
@@ -955,12 +959,25 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		FDA1EBB2288876F5008DB36D /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		FDA1EB9B287ADBE2008DB36D /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FDA1EB9A287ADBE2008DB36D /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+		FDA1EBB3288876F5008DB36D /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDA1EBB2288876F5008DB36D /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */

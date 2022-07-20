@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
 
-    private let collection = PhotoModel.makeCollection()
+    private var collection = PhotoModel.makeCollection()
 
     private lazy var colletionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -24,11 +25,27 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
 
+    private let imagePublisherFacade = ImagePublisherFacade()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         viewInitialSettings()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+
+        addSubscription()
+        addPhotos()
+        view.layoutIfNeeded()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+
+        cancelSubscription()
     }
 
     private func viewInitialSettings() {
@@ -52,6 +69,23 @@ class PhotosViewController: UIViewController {
             colletionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             colletionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    private func addSubscription() {
+        print(#function)
+        imagePublisherFacade.subscribe(self)
+    }
+
+    private func addPhotos() {
+        print(#function)
+        imagePublisherFacade.addImagesWithTimer(time: 1, repeat: 10)
+        colletionView.reloadData()
+    }
+
+    private func cancelSubscription() {
+        print(#function)
+        imagePublisherFacade.rechargeImageLibrary()
+        imagePublisherFacade.removeSubscription(for: self)
     }
 
 }
@@ -98,5 +132,20 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
                      bottom: PhotoConstants.collectionBottomInset,
                      right: PhotoConstants.collectionTrailingInset)
     } // отступы всех эелемнтов от границ collectionView
+
+}
+
+// MARK: - ImageLibrarySubscriber
+
+extension PhotosViewController: ImageLibrarySubscriber {
+
+    func receive(images: [UIImage]) {
+        print(#function)
+        let indexPath = IndexPath(item: collection.count, section: 0)
+        images.forEach { image in
+            collection.append(PhotoModel(photoImage: image))
+        }
+        self.colletionView.insertItems(at: [indexPath])
+    }
 
 }

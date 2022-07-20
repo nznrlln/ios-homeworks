@@ -50,6 +50,8 @@ class LogInViewController: UIViewController {
         textField.delegate = self
         textField.addTarget(self, action: #selector(usernameTextChanged), for: .editingChanged)
 
+        textField.text = "Sleeping Cat"
+
         return textField
     }()
 
@@ -69,6 +71,7 @@ class LogInViewController: UIViewController {
         textField.delegate = self
         textField.addTarget(self, action: #selector(passwordTextChanged), for: .editingChanged)
 
+        textField.text = "123456"
 
         return textField
     }()
@@ -209,16 +212,6 @@ class LogInViewController: UIViewController {
 
 
     @objc private func loginButtonTap(){
-//        #if DEBUG
-//            let currentUser = TestUserService()
-//        #else
-//            let currentUser = CurrentUserService()
-//        #endif
-////        let loginUsername = usernameText ?? ""
-//        let loginUsername = usernameTextField.text!
-//
-//        let profileVC = ProfileViewController(userService: currentUser, userID: loginUsername)
-//        self.navigationController?.pushViewController(profileVC, animated: true)
 
         guard let auth = delegate?.check(username: usernameTextField.text!, password: passwordTextField.text!) else {
             print("nil")
