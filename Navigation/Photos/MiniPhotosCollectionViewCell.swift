@@ -29,8 +29,8 @@ class MiniPhotosCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupCell(model: PhotoModel) {
-        photoImageView.image = model.photoImage
+    func setupCell(model: UIImage) {
+        photoImageView.image = model
     }
 
     override func prepareForReuse() {

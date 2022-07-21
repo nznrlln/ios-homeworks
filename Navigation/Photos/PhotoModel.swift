@@ -8,14 +8,12 @@
 import Foundation
 import UIKit
 
-struct PhotoModel {
+class PhotoModel {
 
-    var photoImage: UIImage
-
-    static func makeCollection() -> [PhotoModel] {
-        var collection = [PhotoModel]()
+    static func makeCollection() -> [UIImage] {
+        var collection = [UIImage]()
         for number in 1...20 {
-            collection.append(PhotoModel(photoImage: UIImage(named: String(number)) ?? UIImage()))
+            collection.append(UIImage(named: String(number)) ?? UIImage())
         }
         return collection
     }
