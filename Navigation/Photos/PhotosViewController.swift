@@ -39,7 +39,7 @@ class PhotosViewController: UIViewController {
 
         addSubscription()
         addPhotos()
-        view.layoutIfNeeded()
+//        view.layoutIfNeeded()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,7 +79,6 @@ class PhotosViewController: UIViewController {
     private func addPhotos() {
         print(#function)
         imagePublisherFacade.addImagesWithTimer(time: 1, repeat: 10)
-        colletionView.reloadData()
     }
 
     private func cancelSubscription() {
@@ -141,11 +140,8 @@ extension PhotosViewController: ImageLibrarySubscriber {
 
     func receive(images: [UIImage]) {
         print(#function)
-        let indexPath = IndexPath(item: collection.count, section: 0)
-        images.forEach { image in
-            collection.append(PhotoModel(photoImage: image))
-        }
-        self.colletionView.insertItems(at: [indexPath])
+        collection += images
+        colletionView.reloadData()
     }
 
 }
